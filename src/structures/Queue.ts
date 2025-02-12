@@ -2,7 +2,7 @@
  * https://www.geeksforgeeks.org/queue-data-structure/
  */
 
-import LinkedList from './LlinkedList';
+import LinkedList from './LinkedList';
 
 export default class Queue<T> {
 	#list: LinkedList<T>;

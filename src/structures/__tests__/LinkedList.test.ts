@@ -1,4 +1,4 @@
-import LinkedList from '../LlinkedList';
+import LinkedList from '../LinkedList';
 
 describe('LinkedList', () => {
 	describe('constructor', () => {

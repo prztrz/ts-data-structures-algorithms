@@ -2,7 +2,7 @@
  * https://www.geeksforgeeks.org/stack-data-structure/
  */
 
-import LinkedList from './LlinkedList';
+import LinkedList from './LinkedList';
 
 export default class Stack<T> {
 	#list: LinkedList<T>;

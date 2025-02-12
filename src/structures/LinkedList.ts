@@ -47,7 +47,7 @@ export default class LinkedList<T> {
 	}
 
 	[Symbol.iterator]() {
-		return this.#toIterator();
+		return new LinkedListIterator<T>(this);
 	}
 
 	constructor(...items: T[]) {
@@ -61,10 +61,6 @@ export default class LinkedList<T> {
 		this.head = emptyLink.head;
 		this.tail = emptyLink.tail;
 		this.#last = emptyLink;
-	}
-
-	#toIterator() {
-		return new LinkedListIterator<T>(this);
 	}
 
 	forEach(cb: (item: T, list: LinkedList<T>) => void) {

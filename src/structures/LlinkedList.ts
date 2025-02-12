@@ -39,8 +39,8 @@ class LinkedListIterator<T> implements Iterator<T> {
 export default class LinkedList<T> {
 	head: T | undefined;
 	tail: Link<T | undefined> | undefined;
-	#last: Link<T | undefined>;
-	#length: number;
+	#last!: Link<T | undefined>;
+	#length!: number;
 
 	get length() {
 		return this.#length;
@@ -51,13 +51,16 @@ export default class LinkedList<T> {
 	}
 
 	constructor(...items: T[]) {
+		this.#clear();
+		this.push(...items);
+	}
+
+	#clear() {
 		this.#length = 0;
 		const emptyLink = new Link<T | undefined>(undefined);
 		this.head = emptyLink.head;
 		this.tail = emptyLink.tail;
 		this.#last = emptyLink;
-
-		this.push(...items);
 	}
 
 	#toIterator() {
@@ -116,8 +119,16 @@ export default class LinkedList<T> {
 	}
 
 	toArray() {
-		const result: T[] = [];
-		this.forEach((item) => result.push(item));
-		return result;
+		return [...this];
+	}
+
+	unshift(...items: T[]) {
+		if (items.length === 0) {
+			return;
+		}
+
+		const arrified = this.toArray();
+		this.#clear();
+		this.push(...items, ...arrified);
 	}
 }

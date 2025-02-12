@@ -116,4 +116,22 @@ describe('LinkedList', () => {
 			expect(new LinkedList(1, 2, 3).toArray()).toEqual([1, 2, 3]);
 		});
 	});
+
+	describe('unshift', () => {
+		it('does not mutate when no arguments', () => {
+			const list = new LinkedList(1);
+			list.unshift();
+			expect(list).toEqual({ head: 1, tail: undefined });
+		});
+
+		it('Adds arguments on top of empty list', () => {
+			const list = new LinkedList();
+
+			list.unshift(3);
+			expect(list).toEqual({ head: 3, tail: undefined });
+
+			list.unshift(1, 2);
+			expect(list).toEqual({ head: 1, tail: { head: 2, tail: { head: 3, tail: undefined } } });
+		});
+	});
 });

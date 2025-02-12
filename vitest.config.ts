@@ -8,6 +8,6 @@ export default defineConfig({
 		environment: 'node',
 		testTimeout: 30_000,
 		dir: 'src',
-		include: ['**/__tests__/**']
+		include: ['**/__tests__/**'],
 	},
 });

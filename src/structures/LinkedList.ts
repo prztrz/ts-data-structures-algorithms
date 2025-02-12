@@ -6,9 +6,9 @@ export class Link<T> {
 	head: T;
 	tail: Link<T> | undefined;
 
-	constructor(item: T) {
+	constructor(item: T, tail?: Link<T>) {
 		this.head = item;
-		this.tail = undefined;
+		this.tail = tail;
 	}
 
 	link(link: T) {
@@ -19,9 +19,8 @@ export class Link<T> {
 
 class LinkedListIterator<T> implements Iterator<T> {
 	#link: Link<T | undefined>;
-	constructor(list: LinkedList<T | undefined>) {
-		this.#link = new Link(list.head);
-		this.#link.tail = list.tail;
+	constructor(link: Link<T | undefined>) {
+		this.#link = link;
 	}
 
 	next() {
@@ -47,7 +46,7 @@ export default class LinkedList<T> {
 	}
 
 	[Symbol.iterator]() {
-		return new LinkedListIterator<T>(this);
+		return new LinkedListIterator<T>(this.#toLink());
 	}
 
 	constructor(...items: T[]) {
@@ -61,6 +60,10 @@ export default class LinkedList<T> {
 		this.head = emptyLink.head;
 		this.tail = emptyLink.tail;
 		this.#last = emptyLink;
+	}
+
+	#toLink() {
+		return new Link(this.head, this.tail);
 	}
 
 	forEach(cb: (item: T, list: LinkedList<T>) => void) {
